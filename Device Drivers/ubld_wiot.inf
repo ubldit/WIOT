@@ -2,6 +2,7 @@
 ; Chris K Cockrum, Ubld Electronics, LLC
 ; More WIOT info at: http://WIOT.org
 ; http://ubld.it
+; Copyright 2015, Ubld Electronics, LLC.
 
 [Strings] 
 MFGNAME="Ubld Electronics"
