@@ -6,6 +6,12 @@ More information at:
 
 <a href="http://WIOT.org"><img src="https://cockrum.net/images/WIOT_Rev2.jpg"></a>
 
+Directories
+-----------
+Hardware/ -- Schematic, PCB Layers
+
+Software/ -- Example Arduino sketches
+
 License Information
 -------------------
 The hardware is released under [Creative Commons ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/).
