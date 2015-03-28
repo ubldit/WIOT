@@ -43,6 +43,9 @@ int led = 0;
 // This sets up the esp8266
 void setupWifi()
 {
+  // Turn on ESP-8266 Power
+  digitalWrite(12, LOW);
+  
   // Reset esp8266
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
