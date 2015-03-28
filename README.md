@@ -3,3 +3,4 @@ Arduino Addon, firmware, example sketch, and schematics for the Wireless Interne
 
 More information at: http://WIOT.org
 
+<img src="https://cockrum.net/images/WIOT_Rev2.jpg">
