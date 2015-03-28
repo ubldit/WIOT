@@ -14,7 +14,7 @@ Signature="$Windows NT$"
 Class=Ports
 ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318} 
 Provider=%MFGNAME% 
-DriverVer=01/25/2015,1.0.0.0
+DriverVer=03/28/2015,1.1.0.0
 CatalogFile=ubld_wiot.cat
 
 [Manufacturer] 
