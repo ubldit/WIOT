@@ -10,8 +10,8 @@
 
 /* Connects to Access point specified by SSID #define */
 /* Password to your Access point specified by WIFI_PW #define */
-/* ESP8266 get an IP via DHCP */
-/* Serves a simple web page with 2 buttons that control LED1 and LED2 */
+/* ESP8266 gets an IP via DHCP */
+/* Serves a simple web page with 2 buttons that control the user LED (D13) */
 
 // Set these to your Access Point information
 #define SSID 	"YOUR_SSID"
@@ -35,23 +35,31 @@
 // Set esp8266 to use Serial1
 #define esp8266 Serial1
 
+// Pin defintions
+// User LED (D13)
+#define USER_LED 13
+// wifi reset pin (D11)
+#define ESP_RST 11
+// wifi power pin (D12) active low
+#define ESP_PWR 12
+
 // Global Variables 
 long blinkTime = 0;
-boolean blink = 0;
-int led = 0;
+boolean blink_state = 0;
+int led_state = 2;
 
 // This sets up the esp8266
 void setupWifi()
 {
   /* Turn on ESP-8266 Power */
-  pinMode(12, OUTPUT);
-  digitalWrite(12, LOW);
+  pinMode(ESP_PWR, OUTPUT);
+  digitalWrite(ESP_PWR, LOW);
   
   // Reset esp8266
-  pinMode(13, OUTPUT);
-  digitalWrite(13, LOW);
+  pinMode(ESP_RST, OUTPUT);
+  digitalWrite(ESP_RST, LOW);
   delay(50);
-  digitalWrite(13, HIGH);
+  digitalWrite(ESP_RST, HIGH);
 
   // Wait for the module to reset
   delay(500);
@@ -62,6 +70,7 @@ void setupWifi()
   sendData("AT+CWJAP=\"" + String(SSID) + "\",\"" + String(WIFI_PW) + "\"\r\n",1000,DEBUG); // AP info
   for (int8_t i = 5; i >= 0; i--)
   {
+    // Print waiting and alternate rx/tx until we are done waiting
     DEBUG_PRINT("waiting...");
     RXLED0;
     TXLED1;
@@ -85,10 +94,12 @@ void setup()
   #ifdef DEBUG
   Serial.begin(9600);
   #endif
-  
+
+  // Set up the UART to the Wifi Module  
   esp8266.begin(9600);
   esp8266.setTimeout(500);
 
+  // Initializes the Wifi Module
   setupWifi();  
 }
 
@@ -101,40 +112,28 @@ void loop()
   
   // This is the 'blinky' code
   
-  if(led)
+  if(led_state == 1)
   {
     if(millis() > blinkTime)
     {
       blinkTime = millis() + 100;
       
-      if(blink)
+      if(blink_state)
       {
-        if(led == 1)
-        {
-          RXLED1;
-        }
-        else
-        {
-          TXLED1;
-        }
+        digitalWrite(USER_LED, HIGH);
       }
       else
       {
-        if(led == 1)
-        {
-          RXLED0;
-        }
-        else
-        {
-          TXLED0;
-        }
+        digitalWrite(USER_LED, LOW);
       }      
-      blink = !blink;
+      blink_state = !blink_state;
     }
   }
   
-  if(esp8266.available()) // check if the esp is sending a message 
+  if(esp8266.available()) // check if the esp is sending us a message 
   {
+    RXLED0;
+
     if(esp8266.find("+IPD,"))
     {
      delay(100);
@@ -149,13 +148,14 @@ void loop()
        switch(c)
        {
          case '1':
-           DEBUG_PRINTLN("req led1");
-           led = 1;
+           DEBUG_PRINTLN("req led blink");
+           led_state = 1;
          break;
          
          case '2':
-           DEBUG_PRINTLN("req led2");
-           led = 2;
+           DEBUG_PRINTLN("req led off");
+           digitalWrite(USER_LED, LOW);
+           led_state = 2;
          break;
          
          default:
@@ -170,10 +170,20 @@ void loop()
        DEBUG_PRINTLN("got end of request");
      }
 
-     webpage = "<html><body><h1>Hello</h1><h2>";
+     webpage = "<html><body><h1>WIOT Test</h1><h2>";
      webpage += String(millis());
-     webpage += "</h2><a href=\"/1\"><button>LED1</button></a>";
-     webpage += "<a href=\"/2\"><button>LED2</button></a></body></html>";
+     webpage += "</h2>";
+     
+     if(led_state == 2)
+     {
+       webpage += "<a href=\"/1\"><button>LED Blink</button></a>";
+     }
+     else
+     {
+       webpage += "<a href=\"/2\"><button>LED Off</button></a>";
+     }
+     
+     webpage += "</body></html>";
      
      cipSend = "AT+CIPSEND=";
      cipSend += connectionId;
@@ -190,15 +200,19 @@ void loop()
      
      sendData(closeCommand,500,DEBUG);
     }
+    
+    RXLED1;
   }
 }
 
-// This is used to talk to the WIOT
+// This is used to talk to the Wifi Module
 String sendData(String command, const int timeout, boolean debug)
 {
     char c;
     String response = "";
-        
+ 
+    TXLED0;
+    
     esp8266.print(command); // send the read character to the esp8266
     
     long int time = millis();
@@ -224,6 +238,8 @@ String sendData(String command, const int timeout, boolean debug)
     {
       DEBUG_PRINT(response);
     }
+    
+    TXLED1;
     
     return response;
 }
