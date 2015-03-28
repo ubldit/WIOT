@@ -9,8 +9,9 @@ More information at:
 Directories
 -----------
 Hardware/ -- Schematic, PCB Layers
-
 Software/ -- Example Arduino sketches
+Docs/ -- Documentation and Photos
+Device Drivers/ -- Device drivers for WIOT board
 
 License Information
 -------------------
