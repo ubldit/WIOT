@@ -85,6 +85,9 @@ void setup()
   #ifdef DEBUG
   Serial.begin(9600);
   #endif
+
+  // initialize digital pin 13 as an output.
+  pinMode(13, OUTPUT);
   
   esp8266.begin(9600);
   esp8266.setTimeout(500);
