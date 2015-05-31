@@ -40,5 +40,5 @@ WIOT.build.pid=0x0958
 WIOT.build.usb_product="WIOT Board"
 WIOT.build.usb_manufacturer="Ubld Electronics"
 WIOT.build.core=arduino:arduino
-WIOT.build.variant=leonardo
+WIOT.build.variant=arduino:leonardo
 WIOT.build.extra_flags={build.usb_flags}
