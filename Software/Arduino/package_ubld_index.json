@@ -16,8 +16,8 @@
                "category":"Contributed",
                "url":"https://github.com/ubldit/WIOT/raw/master/Software/Arduino/ublditboards.tar.bz2",
                "archiveFileName":"ublditboards.tar.bz2",
-               "checksum":"SHA-256:6b1c75d68593065691a9638faff749bbe7f64c1c5030123317342c1656897683",
-               "size":"34348",
+               "checksum":"SHA-256:b1e75a22cba16bd3a944f480250c3ebcdb2d47410dddeac1e18be177cd55b9df",
+               "size":"37501",
                "help":{
                   "online":"http://ubld.it/forums"
                },
