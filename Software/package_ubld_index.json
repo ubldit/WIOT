@@ -1,0 +1,45 @@
+{
+   "packages":[
+      {
+         "name":"Ubldit",
+         "maintainer":"Ubld Electronics, LLC",
+         "websiteURL":"http://ubld.it",
+         "email":"sales@ubld.it",
+         "help":{
+            "online":"http://ubld.it/forums"
+			
+         },
+         "platforms":[
+            {
+               "name":"Ubld.it Boards",
+               "architecture":"avr",
+               "version":"1.0.0",
+               "category":"Contributed",
+               "url":"https://github.com/ubldit/WIOT/tree/master/Software/Arduino/ublditboards.tar.bz2",
+               "archiveFileName":"ublditboards.tar.bz2",
+               "checksum":"SHA-256:6b1c75d68593065691a9638faff749bbe7f64c1c5030123317342c1656897683",
+               "size":"34348",
+               "help":{
+                  "online":"http://ubld.it/forums"
+               },
+               "boards":[
+                  { "name":"Ubld.it WIOT" }
+               ],
+               "toolsDependencies":[
+                  {
+                     "packager":"arduino",
+                     "name":"avr-gcc",
+                     "version":"4.8.1-arduino5"
+                  },
+                  {
+                     "packager":"arduino",
+                     "name":"avrdude",
+                     "version":"6.0.1-arduino5"
+                  }
+               ]
+            }
+         ],
+         "tools":[]
+      }
+   ]
+}
