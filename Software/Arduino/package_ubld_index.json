@@ -2,12 +2,11 @@
    "packages":[
       {
          "name":"Ubldit",
-         "maintainer":"Ubld Electronics, LLC",
+         "maintainer":"Ubld Electronics",
          "websiteURL":"http://ubld.it",
          "email":"sales@ubld.it",
          "help":{
             "online":"http://ubld.it/forums"
-			
          },
          "platforms":[
             {
@@ -15,7 +14,7 @@
                "architecture":"avr",
                "version":"1.0.0",
                "category":"Contributed",
-               "url":"https://github.com/ubldit/WIOT/tree/master/Software/Arduino/ublditboards.tar.bz2",
+               "url":"https://github.com/ubldit/WIOT/blob/master/Software/Arduino/ublditboards.tar.bz2",
                "archiveFileName":"ublditboards.tar.bz2",
                "checksum":"SHA-256:6b1c75d68593065691a9638faff749bbe7f64c1c5030123317342c1656897683",
                "size":"34348",
