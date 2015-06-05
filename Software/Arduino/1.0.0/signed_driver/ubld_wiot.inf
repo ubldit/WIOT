@@ -1,0 +1,48 @@
+; Windows INF to load usbser driver for WIOT board
+; Chris K Cockrum, Ubld Electronics, LLC
+; More WIOT info at: http://WIOT.org
+; http://ubld.it
+; Copyright 2015, Ubld Electronics, LLC.
+
+[Strings] 
+MFGNAME="Ubld Electronics"
+WIOT.bootloader.name="WIOT USB bootloader"
+WIOT.sketch.name="WIOT USB Board" 
+
+[Version] 
+Signature="$Windows NT$" 
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318} 
+Provider=%MFGNAME% 
+DriverVer=03/28/2015,1.1.0.0
+CatalogFile=ubld_wiot.cat
+
+[Manufacturer] 
+%MFGNAME%=DeviceList,  NTamd64, NTia64
+
+[DeviceList]
+%WIOT.bootloader.name%=DriverInstall, USB\VID_16D0&PID_0957
+%WIOT.sketch.name%=DriverInstall, USB\VID_16D0&PID_0958&MI_00
+
+[DeviceList.NTamd64]
+%WIOT.bootloader.name%=DriverInstall, USB\VID_16D0&PID_0957
+%WIOT.sketch.name%=DriverInstall, USB\VID_16D0&PID_0958&MI_00
+
+[DeviceList.NTia64]
+%WIOT.bootloader.name%=DriverInstall, USB\VID_16D0&PID_0957
+%WIOT.sketch.name%=DriverInstall, USB\VID_16D0&PID_0958&MI_00
+
+[DriverInstall]
+include=mdmcpq.inf,usb.inf
+CopyFiles = FakeModemCopyFileSection
+AddReg=DriverAddReg
+
+[DriverAddReg]
+HKR,,DevLoader,,*ntkern 
+HKR,,NTMPDriver,,usbser.sys 
+HKR,,EnumPropPages32,,"msports.dll,SerialPortPropPageProvider"
+
+[DriverInstall.Services]
+Include=mdmcpq.inf
+AddService=usbser,0x00000002,LowerFilter_Service_Inst 
+

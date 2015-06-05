@@ -1,0 +1,12 @@
+More information about WIOT at http://WIOT.org
+
+Modified by Chris K Cockrum, Ubld Electronics, LLC. http://ubld.it
+
+For Arduino 1.6.2
+
+Unzip "Arduino 1.6.2 Addon for WIOT.zip" into the arduino directory (i.e. C:\Users\USERNAME\AppData\Roaming\Arduino15)
+Note: This will overwrite the existing boards.txt   You may need to manually add the WIOT section if you have already installed other hardware Addons
+
+Although the new 1.6.2 has a new board manager, it is unclear how to use this in this version.
+There are forum posts talking about this feature being broken in 1.6.2.
+We plan to integrate into this feature as soon as it is working.

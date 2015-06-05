@@ -1,0 +1,44 @@
+# Ubld.it Board Contribution Configuration
+#
+# For more information see:
+# http://ubld.it
+# https://github.com/ubldit
+#
+
+################################################################################
+############################## WIOT 3.3V / 8MHz ################################
+################################################################################
+
+WIOT.name=Ubld.it WIOT
+WIOT.vid.0=0x16D0
+WIOT.pid.0=0x0957
+WIOT.vid.1=0x16D0
+WIOT.pid.1=0x0958
+
+WIOT.upload.tool=arduino:avrdude
+WIOT.upload.protocol=avr109
+WIOT.upload.maximum_size=28672
+WIOT.upload.maximum_data_size=2560
+WIOT.upload.speed=57600
+WIOT.upload.disable_flushing=true
+WIOT.upload.use_1200bps_touch=true
+WIOT.upload.wait_for_upload_port=true
+
+WIOT.bootloader.tool=arduino:avrdude
+WIOT.bootloader.low_fuses=0xff
+WIOT.bootloader.high_fuses=0xd8
+WIOT.bootloader.extended_fuses=0xfe
+WIOT.bootloader.file=caterina-WIOT/Caterina.hex
+WIOT.bootloader.unlock_bits=0x3F
+WIOT.bootloader.lock_bits=0x2F
+
+WIOT.build.mcu=atmega32u4
+WIOT.build.f_cpu=8000000L
+WIOT.build.board=AVR_WIOT
+WIOT.build.vid=0x16D0
+WIOT.build.pid=0x0958
+WIOT.build.usb_product="WIOT Board"
+WIOT.build.usb_manufacturer="Ubld Electronics"
+WIOT.build.core=arduino:arduino
+WIOT.build.variant=arduino:leonardo
+WIOT.build.extra_flags={build.usb_flags}
